@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attractive Header and Footer with Animation</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #fff;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 998;
+        }
+
+        .navbar a {
+            padding: 14px 20px;
+            display: block;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .menu-icon {
+            display: none; /* Hide by default on larger screens */
+            cursor: pointer;
+            color: #fff;
+            font-size: 24px;
+            z-index: 999;
+            margin-right: 10px; /* Move to right side */
+        }
+
+        .menu {
+            display: none;
+            flex-direction: column;
+            background-color: #333;
+            position: absolute;
+            top: 0;
+            right: 0; /* Align to the right */
+            width: 100%;
+            height: 100vh; /* Full height */
+            box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1); /* Adjust shadow for right side */
+            z-index: 997;
+            transform: translateX(100%); /* Initially off-screen */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .menu.active {
+            transform: translateX(0); /* Slide in from the right */
+        }
+
+        .menu a {
+            padding: 14px 20px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: block;
+            text-align: center;
+        }
+
+        .menu a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .menu .back-to-main {
+            padding: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .menu .back-to-main:hover {
+            background-color: #45a049;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, #f3e7e9 25%, #e3eeff 50%, #e4fffc 75%);
+        }
+
+        .highlight {
+            font-weight: bold;
+            font-size: 45px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+            font-style: italic;
+            animation: rainbowText 4s linear infinite;
+        }
+
+        .connect-text {
+            font-size: 30px;
+            font-style: italic;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: colorChange 3s linear infinite;
+        }
+
+        .content img {
+            width: 80%;
+            max-width: 600%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border: 5px solid #4CAF50;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background-color: #25D366; /* WhatsApp green */
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E; /* Darker shade of WhatsApp green */
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #ddd;
+        }
+
+        .footer p {
+            margin: 10px 0 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes rainbowText {
+            0%, 100% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #8b00ff; }
+        }
+
+        @keyframes colorChange {
+            0%, 100% { color: red; }
+            33% { color: orange; }
+            66% { color: green; }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                display: none; /* Hide regular links */
+            }
+
+            .menu-icon {
+                display: block; /* Show the menu icon */
+            }
+
+            .menu {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                right: 0; /* Align to the right */
+                background-color: #333;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                z-index: 999;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .menu.active {
+                transform: translateX(0);
+            }
+
+            .menu a {
+                padding: 14px 20px;
+                color: #fff;
+                text-decoration: none;
+                transition: background-color 0.3s;
+                display: block;
+                text-align: center;
+            }
+
+            .menu a:hover {
+                background-color: #ddd;
+                color: #333;
+            }
+
+            .menu .back-to-main {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                background-color: #4CAF50;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>My Website</h1>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    </div>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact Us</a>
+    </div>
+    <div class="menu" id="menu">
+        <a href="#home" onclick="toggleMenu()">Home</a>
+        <a href="#services" onclick="toggleMenu()">Services</a>
+        <a href="#about" onclick="toggleMenu()">About Us</a>
+        <a href="#contact" onclick="toggleMenu()">Contact Us</a>
+        <a href="#" class="back-to-main" onclick="toggleMenu()">Back to Main Screen</a>
+    </div>
+    <div class="content">
+        <h2 class="highlight">BOOK ADVERTISEMENT IN ANY NEWSPAPER IN DELHI + NCR AND ALL OVER INDIA</h2>
+        <img src="./news.webp" alt="Advertisement Image">
+        <p class="connect-text">TO BOOK ADVERTISEMENT IN ANY NEWSPAPER CONNECT WITH US ON WHATSAPP</p>
+        <a href="https://api.whatsapp.com/send?phone=919911099392" class="whatsapp-btn" target="_blank">Message Us on WhatsApp</a>
+    </div>
+    <div class="footer">
+        
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+        </div>
+        <p>&copy; 2024 My Website. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
